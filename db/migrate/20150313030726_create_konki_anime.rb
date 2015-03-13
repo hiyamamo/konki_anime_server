@@ -1,6 +1,6 @@
 class CreateKonkiAnime < ActiveRecord::Migration
   def change
-    create_table :broadcastings, :options => 'ENGINE=InnoDB DEFAULT CHARSET=utf8' do |t|
+    create_table :broadcastings do |t|
       t.string :title, :null => false
       t.date :started_day, :null => false
       t.date :ended_day, :null => false
