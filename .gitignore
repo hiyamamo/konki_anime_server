@@ -2,5 +2,5 @@
 /.DS_Store
 /.env
 /.bundle
-/confgi/database.yml
+/config/database.yml
 
