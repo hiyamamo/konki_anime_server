@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script type="text/javascript">
+$("#submit").on("click", function(){
+    });
+$(document).on("click", "[id='add']", function(){
+    var max_no = $("#inputTbl > tbody > tr:last td:first" ).html();
+    var next_no = parseInt(max_no) + 1;
+    $("#inputTbl > tbody > tr:last").clone(true).appendTo($("#inputTbl > tbody"));
+    $("#inputTbl > tbody > tr:last").css("display" , "");
+    $("inputTbl > tbody > tr:last td:first").html(next_no);
+    $("inputTbl > tbody > tr:last > td > input").each(function(){
+      var base_name = $(this).attr("name");
+      $(this).attr("name", base_name + "_" + next_no);
+      });
+    });
+</script>
+<title>追加</title>
+</head>
+<body>
+<div>
+<table border>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>title</th>
+    <th>開始日</th>
+    <th>終了日</th>
+    <th>開始時間</th>
+    <th>曜日</th>
+    <th>局</th>
+  </tr>
+</thead>
+<tbody>
+  <% @broadcastings.each do |b| %>
+    <tr>
+      <td><%= b.id %></td>
+      <td><%= b.title %></td>
+      <td><%= b.started_day %></td>
+      <td><%= b.ended_day %></td>
+      <td><%= b.started_time %></td>
+      <td><%= b.day_of_week %></td>
+      <td><%= b.tv_station %></td>
+      <form method="post" action="del">
+      <td><input type="submit" value="削除"></td>
+      <input type="hidden" name="id" value="<%= b.id %>">
+      <input type="hidden" name="_method" value="DELETE">
+      </form>
+    </tr>
+  <% end %>
+  </tbody>
+</table>
+</div>
+</table>
+<div>
+<table id="inputTbl" border>
+  <thead>
+  <tr>
+    <th>No</th>
+    <th>title</th>
+    <th>開始日</th>
+    <th>終了日</th>
+    <th>開始時間</th>
+    <th>曜日</th>
+    <th>局</th>
+  </tr>
+</thead>
+<tbody>
+    <tr>
+      <td>1</td>
+      <td><input type="text" name="title"></td>
+      <td><input type="text" name="started_day"></td>
+      <td><input type="text" name="ended_day"></td>
+      <td><input type="text" name="started_time"></td>
+      <td><input type="text" name="day_of_week"></td>
+      <td><input type="text" name="tv_station"></td>
+      <td><button type="button" name="add" id="add">追加</button></td>
+      <td><button type="button" name="del">削除</button></td>
+    </tr>
+</tbody>
+  </table>
+  <button type="buddon" name="submit" id="submit">登録</button>
+</div>
+</body>
+</html>
