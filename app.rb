@@ -1,7 +1,9 @@
 require 'sinatra'
-require 'sinatra/reloader'
 require './models/broadcastings.rb'
 
+if ENV["RACK_ENV" == "development"] do
+  require 'sinatra/reloader'
+end
 enable :method_override
 get '/' do
   @broadcastings = Broadcasting.all
