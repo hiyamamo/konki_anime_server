@@ -4,19 +4,15 @@ require './models/broadcastings.rb'
 
 enable :method_override
 get '/' do
-  'aaaa'
+  @broadcastings = Broadcasting.all
+  erb :add_page
 end
 
 get '/broadcasting' do
   content_type :json, :charset => 'utf-8'
 end
 
-get '/admin/add' do
-  @broadcastings = Broadcasting.all
-  erb :add_page
-end
-
-post '/admin/new' do
+post '/new' do
   broadcasting = Broadcasting.new
   broadcasting.title = params[:title]
   broadcasting.started_day = params[:started_day]
@@ -28,7 +24,7 @@ post '/admin/new' do
   redirect '/admin/add'
 end
 
-delete '/admin/del' do
+delete '/del' do
   broadcasting = Broadcasting.find(params[:id])
   broadcasting.destroy
   redirect '/admin/add'
