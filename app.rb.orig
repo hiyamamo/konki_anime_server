@@ -1,4 +1,12 @@
 require 'sinatra'
+<<<<<<< HEAD
+require 'sinatra/reloader'
+require './models/broadcastings.rb'
+
+enable :method_override
+get '/' do
+  'aaaa'
+=======
 require './models/broadcastings.rb'
 
 if(ENV["RACK_ENV"] == "development") then
@@ -8,13 +16,23 @@ enable :method_override
 get '/' do
   @broadcastings = Broadcasting.all
   erb :add_page
+>>>>>>> b43a5fe7bed645d81c273ea4bcc10991c858f7ad
 end
 
 get '/broadcasting' do
   content_type :json, :charset => 'utf-8'
 end
 
+<<<<<<< HEAD
+get '/admin/add' do
+  @broadcastings = Broadcasting.all
+  erb :add_page
+end
+
+post '/admin/new' do
+=======
 post '/new' do
+>>>>>>> b43a5fe7bed645d81c273ea4bcc10991c858f7ad
   broadcasting = Broadcasting.new
   broadcasting.title = params[:title]
   broadcasting.started_day = params[:started_day]
@@ -26,7 +44,11 @@ post '/new' do
   redirect '/admin/add'
 end
 
+<<<<<<< HEAD
+delete '/admin/del' do
+=======
 delete '/del' do
+>>>>>>> b43a5fe7bed645d81c273ea4bcc10991c858f7ad
   broadcasting = Broadcasting.find(params[:id])
   broadcasting.destroy
   redirect '/admin/add'

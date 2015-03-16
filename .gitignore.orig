@@ -1,0 +1,9 @@
+/vendor/bundle
+/.DS_Store
+/.env
+/.bundle
+<<<<<<< HEAD
+=======
+/config/database.yml
+
+>>>>>>> b43a5fe7bed645d81c273ea4bcc10991c858f7ad
