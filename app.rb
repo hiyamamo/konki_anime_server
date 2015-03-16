@@ -1,7 +1,6 @@
 require 'sinatra'
 require './models/broadcastings.rb'
 
-require 'sinatra/reloader'
 if(ENV["RACK_ENV"] == "development") then
   require 'sinatra/reloader'
 end
