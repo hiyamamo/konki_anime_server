@@ -11,8 +11,10 @@ get '/' do
   erb :add_page
 end
 
-get '/broadcasting' do
+get '/broadcastings' do
   content_type :json, :charset => 'utf-8'
+  b = Broadcasting.all
+  b.to_json(:root => true)
 end
 
 post '/new' do
