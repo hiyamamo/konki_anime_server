@@ -3,20 +3,8 @@
 <head>
 <meta charset="utf-8"/>
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script  type="text/javascript" src="js/add.js"></script>
 <script type="text/javascript">
-$("#submit").on("click", function(){
-    });
-$(document).on("click", "[id='add']", function(){
-    var max_no = $("#inputTbl > tbody > tr:last td:first" ).html();
-    var next_no = parseInt(max_no) + 1;
-    $("#inputTbl > tbody > tr:last").clone(true).appendTo($("#inputTbl > tbody"));
-    $("#inputTbl > tbody > tr:last").css("display" , "");
-    $("inputTbl > tbody > tr:last td:first").html(next_no);
-    $("inputTbl > tbody > tr:last > td > input").each(function(){
-      var base_name = $(this).attr("name");
-      $(this).attr("name", base_name + "_" + next_no);
-      });
-    });
 </script>
 <title>追加</title>
 </head>
@@ -68,8 +56,8 @@ $(document).on("click", "[id='add']", function(){
     <th>局</th>
   </tr>
 </thead>
-<tbody>
-    <tr>
+<tbody id="inputBody">
+    <tr id="inputTr">
       <td>1</td>
       <td><input type="text" name="title"></td>
       <td><input type="text" name="started_day"></td>
@@ -78,11 +66,11 @@ $(document).on("click", "[id='add']", function(){
       <td><input type="text" name="day_of_week"></td>
       <td><input type="text" name="tv_station"></td>
       <td><button type="button" name="add" id="add">追加</button></td>
-      <td><button type="button" name="del">削除</button></td>
+      <td><button type="button" name="del", id="delete">削除</button></td>
     </tr>
 </tbody>
   </table>
-  <button type="buddon" name="submit" id="submit">登録</button>
+  <button type="button" name="submit" id="submit">登録</button>
 </div>
 </body>
 </html>
