@@ -34,6 +34,10 @@ delete '/del' do
   broadcasting = Broadcasting.find(params[:id])
   broadcasting.destroy
   redirect '/'
+end
 
+delete '/del_all' do
+  Broadcasting.delete_all
+  redirect '/'
 end
 

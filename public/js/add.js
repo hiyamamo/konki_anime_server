@@ -27,9 +27,8 @@ $(function(){
     var params = {};
     var i = 0;
     $("#inputBody > tr").each(function(){
-      var t = $(this).find("input");
       params[i] = {};
-      $(this).find("input").each(function(){
+      $(this).find("input,select").each(function(){
         var key = $(this).attr("name").toString();
         params[i][key] = $(this).val();
       });
