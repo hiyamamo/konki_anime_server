@@ -11,12 +11,11 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150313071556) do
+ActiveRecord::Schema.define(version: 20150317050950) do
 
   create_table "broadcastings", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
     t.string   "started_day",  limit: 255, null: false
-    t.string   "ended_day",    limit: 255, null: false
     t.string   "started_time", limit: 255, null: false
     t.string   "day_of_week",  limit: 255, null: false
     t.string   "tv_station",   limit: 255, null: false

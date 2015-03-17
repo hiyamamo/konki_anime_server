@@ -10,9 +10,10 @@ get '/' do
   erb :add_page
 end
 
-get '/broadcastings' do
+get '/broadcastings/' do
   content_type :json, :charset => 'utf-8'
-  b = Broadcasting.all
+  p = Rack::Utils.parse_query(@env['rack.request.query_string'])
+  b = Broadcasting.where(:tv_station => p['tv_station'])
   b.to_json(:root => true)
 end
 
