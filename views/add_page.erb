@@ -22,17 +22,17 @@
   </tr>
 </thead>
 <tbody>
-  <% @broadcastings.each do |b| %>
+  <% @programs.each do |p| %>
     <tr>
-      <td><%= b.title %></td>
-      <td><%= b.started_day %></td>
-      <td><%= b.started_time %></td>
-      <th><%= b.url %></td>
-      <td><%= b.day_of_week %></td>
-      <td><%= b.tv_station %></td>
+      <td><%= p.title %></td>
+      <td><%= p.started_day %></td>
+      <td><%= p.started_time %></td>
+      <th><%= p.url %></td>
+      <td><%= p.day_of_week %></td>
+      <td><%= p.tv_station %></td>
       <form method="post" action="del">
       <td><input type="submit" value="削除"></td>
-      <input type="hidden" name="id" value="<%= b.id %>">
+      <input type="hidden" name="id" value="<%= p.id %>">
       <input type="hidden" name="_method" value="DELETE">
       </form>
     </tr>

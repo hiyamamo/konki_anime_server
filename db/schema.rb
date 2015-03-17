@@ -11,9 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317054015) do
+ActiveRecord::Schema.define(version: 20150317123518) do
 
-  create_table "broadcastings", force: :cascade do |t|
+  create_table "programs", force: :cascade do |t|
     t.string   "title",        limit: 255, null: false
     t.string   "started_day",  limit: 255, null: false
     t.string   "started_time", limit: 255, null: false
