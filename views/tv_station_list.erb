@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"/>
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<title>tv_station</title>
+<script type="text/javascript">
+function checkSubmit(){
+  return confirm("削除？");
+}
+</script>
+</head>
+<body>
+<div>
+<table border>
+  <thead>
+    <tr>
+      <th>TV_STATION</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @tv_stations.each do |t| %>
+    <tr>
+      <td><%= t.name %></td>
+      <form action="/tv_station_list/del" method="post" onSubmit="return checkSubmit()">
+        <td><input type="submit" value="削除"></td>
+        <input type="hidden" name="id" value="<%= t.id %>">
+        <input type="hidden" name="_method" value="DELETE">
+        </form>
+    </tr>
+  <% end %>
+  <tr>
+    <form action="/tv_station_list/new" method="post">
+      <td><input name="name" type="text"></td>
+      <td><input type="submit" value="登録"></td>
+    </form>
+  </tr>
+  </tbody>
+</table>
+<a href='/'>add_page</a>
+</body>
+</html>

@@ -39,3 +39,7 @@ $(function(){
     });
   });
 });
+
+function checkSubmit(){
+  return confirm("全件削除？");
+}

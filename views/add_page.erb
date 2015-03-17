@@ -16,6 +16,7 @@
     <th>タイトル</th>
     <th>開始日</th>
     <th>開始時間</th>
+    <th>URL</th>
     <th>曜日</th>
     <th>局</th>
   </tr>
@@ -26,6 +27,7 @@
       <td><%= b.title %></td>
       <td><%= b.started_day %></td>
       <td><%= b.started_time %></td>
+      <th><%= b.url %></td>
       <td><%= b.day_of_week %></td>
       <td><%= b.tv_station %></td>
       <form method="post" action="del">
@@ -36,13 +38,11 @@
     </tr>
   <% end %>
   <tr>
-    <form method="post" action="del_all">
+    <form method="post" action="del_all" onSubmit="return checkSubmit()">
       <td><input type="submit" value="全件削除"></td>
       <input type="hidden" name="_method" value="DELETE">
     </form>
   </tbody>
-</table>
-</div>
 </table>
 <div>
 <table id="inputTbl" border>
@@ -52,6 +52,7 @@
     <th>タイトル</th>
     <th>開始日</th>
     <th>開始時間</th>
+    <th>URL</th>
     <th>曜日</th>
     <th>局</th>
   </tr>
@@ -62,6 +63,7 @@
       <td><input type="text" name="title"></td>
       <td><input type="text" name="started_day"></td>
       <td><input type="text" name="started_time"></td>
+      <td><input type="text" name="url"></td>
       <td>
         <select name="day_of_week" size="1">
           <option value="月">月</option>
@@ -76,40 +78,9 @@
       <td>
       <input type="text" list="tv" name="tv_station" autocomplete="on">
       <datalist id="tv">
-      <option value="TOKYO_MX">TOKYO_MX</option>
-      <option value="テレビ東京系">テレビ東京系</option>
-      <option value="フジテレビ">フジテレビ</option>
-      <option value="日本テレビ">日本テレビ</option>
-      <option value="TBS">TBS</option>
-      <option value="テレ玉">テレ玉</option>
-      <option value="テレビ神奈川">テレビ神奈川</option>
-      <option value="チバテレビ">チバテレビ</option>
-      <option value="テレビ北海道">テレビ北海道</option>
-      <option value="MBS">MBS</option>
-      <option value="テレビ大阪">テレビ大阪</option>
-      <option value="KBS_京都">KBS_京都</option>
-      <option value="サンテレビ">サンテレビ</option>
-      <option value="CBC">CBC</option>
-      <option value="テレビ愛知">テレビ愛知</option>
-      <option value="とちぎテレビ">とちぎテレビ</option>
-      <option value="群馬テレビ">群馬テレビ</option>
-      <option value="信越放送">信越放送</option>
-      <option value="岐阜放送">岐阜放送</option>
-      <option value="三重テレビ">三重テレビ</option>
-      <option value="TVQ">TVQ</option>
-      <option value="BS11">BS11</option>
-      <option value="ANIMAX">ANIMAX</option>
-      <option value="AT-X">AT-X</option>
-      <option value="NHK Eテレ">NHK Eテレ</option>
-      <option value="BSジャパン">BSジャパン</option>
-      <option value="TUT">TUT</option>
-      <option value="BS-TBS">BS-TBS</option>
-      <option value="テレビせとうち">テレビせとうち</option>
-      <option value="ABC朝日放送">ABC朝日放送</option>
-      <option value="読売テレビ">読売テレビ</option>
-      <option value="仙台放送">仙台放送</option>
-      <option value="静岡放送">静岡放送</option>
-      <option value="西日本放送">西日本放送</option>
+        <% @tv_stations.each do |t| %>
+          <option value="<%= t.name %>"><%= t.name %></option>
+        <% end %>
       </datalist>
       </td>
       <td><button type="button" name="add" id="add">追加</button></td>
@@ -118,6 +89,8 @@
 </tbody>
   </table>
   <button type="button" name="submit" id="submit">登録</button>
+</table>
 </div>
+<a href='/tv_station_list'>tv_station_list</a>
 </body>
 </html>
