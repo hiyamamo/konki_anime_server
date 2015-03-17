@@ -1,7 +1,7 @@
 require 'sinatra'
 require './models/broadcastings.rb'
 
-if(ENV["RACK_ENV"] == "development") then
+if settings.development?
   require 'sinatra/reloader'
 end
 enable :method_override
