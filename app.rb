@@ -55,9 +55,13 @@ delete '/tv_station_list/del' do
   redirect '/tv_station_list'
 end
 
-get '/programs/' do
+get '/programs' do
   content_type :json, :charset => 'utf-8'
   p = Rack::Utils.parse_query(@env['rack.request.query_string'])
-  b = Program.where(:tv_station => p['tv_station'])
-  b.to_json(:root => true)
+  unless p['tv_station'].nil? then
+    programs = Program.where(:tv_station => p['tv_station'])
+  else
+    programs = Program.all
+  end
+  programs.to_json(:root => true)
 end
