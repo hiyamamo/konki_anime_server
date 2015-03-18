@@ -92,6 +92,11 @@
   <button type="button" name="submit" id="submit">登録</button>
 </table>
 </div>
+<form method="post" action="upload" enctype="multipart/form-data">
+  <input type="file" name="file">
+  <input type="submit" value="upload">
+  <input type="hidden" name="_method" value="put">
+</form>
 <a href='/tv_station_list'>テレビ局リストへ</a>
 </body>
 </html>

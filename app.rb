@@ -1,6 +1,7 @@
 require 'sinatra'
 require './models/programs.rb'
 require './models/tv_stations.rb'
+require 'csv'
 
 if settings.development?
   require 'sinatra/reloader'
@@ -77,3 +78,27 @@ get '/programs' do
   end
   programs.to_json(:root => true)
 end
+
+
+put '/upload' do
+  if params[:file]
+    f = params[:file][:tempfile]
+    i = 0
+    CSV.foreach(f) do |row|
+      if i != 0
+        program = Program.new
+        program.title = row[0]
+        program.started_day = row[1]
+        program.started_time = row[2]
+        program.url = row[3]
+        program.day_of_week = row[4]
+        program.tv_station = row[5]
+        program.save
+      end
+      i = i + 1
+    end
+  end
+  redirect '/'
+end
+
+
