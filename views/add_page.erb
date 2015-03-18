@@ -6,7 +6,7 @@
 <script  type="text/javascript" src="js/add.js"></script>
 <script type="text/javascript">
 </script>
-<title>追加</title>
+<title>放送中テーブル編集</title>
 </head>
 <body>
 <div>
@@ -24,12 +24,13 @@
 <tbody>
   <% @programs.each do |p| %>
     <tr>
-      <td><%= p.title %></td>
-      <td><%= p.started_day %></td>
-      <td><%= p.started_time %></td>
-      <th><%= p.url %></td>
-      <td><%= p.day_of_week %></td>
-      <td><%= p.tv_station %></td>
+      <td name="title"><%= p.title %></td>
+      <td name="started_day"><%= p.started_day %></td>
+      <td name="started_time"><%= p.started_time %></td>
+      <td name="url"><%= p.url %></td>
+      <td name="day_of_week"><%= p.day_of_week %></td>
+      <td name="tv_station"><%= p.tv_station %></td>
+      <td><button type="button" name="edit" id="edit">編集</button></td>
       <form method="post" action="del">
       <td><input type="submit" value="削除"></td>
       <input type="hidden" name="id" value="<%= p.id %>">
@@ -37,13 +38,12 @@
       </form>
     </tr>
   <% end %>
-  <tr>
-    <form method="post" action="del_all" onSubmit="return checkSubmit()">
-      <td><input type="submit" value="全件削除"></td>
-      <input type="hidden" name="_method" value="DELETE">
-    </form>
   </tbody>
 </table>
+<form method="post" action="del_all" onSubmit="return checkSubmit()">
+  <td><input type="submit" value="DB全件削除"></td>
+  <input type="hidden" name="_method" value="DELETE">
+</form>
 <div>
 <table id="inputTbl" border>
   <thead>
@@ -65,7 +65,8 @@
       <td><input type="text" name="started_time"></td>
       <td><input type="text" name="url"></td>
       <td>
-        <select name="day_of_week" size="1">
+        <input type="text" list="week" name="day_of_week" autocomplete="on">
+        <datalist  id="week">
           <option value="月">月</option>
           <option value="火">火</option>
           <option value="水">水</option>
@@ -73,7 +74,7 @@
           <option value="金">金</option>
           <option value="土">土</option>
           <option value="日">日</option>
-        </select>
+          </datalist>
       </td>
       <td>
       <input type="text" list="tv" name="tv_station" autocomplete="on">
@@ -83,7 +84,7 @@
         <% end %>
       </datalist>
       </td>
-      <td><button type="button" name="add" id="add">追加</button></td>
+      <td><button type="button" name="add" id="add">コピー</button></td>
       <td><button type="button" name="del", id="delete">削除</button></td>
     </tr>
 </tbody>
@@ -91,6 +92,6 @@
   <button type="button" name="submit" id="submit">登録</button>
 </table>
 </div>
-<a href='/tv_station_list'>tv_station_list</a>
+<a href='/tv_station_list'>テレビ局リストへ</a>
 </body>
 </html>

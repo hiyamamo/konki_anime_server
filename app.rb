@@ -25,6 +25,18 @@ post '/new' do
   end
   status 202
 end
+post "/update" do
+  program = Program.find(params[:id]);
+  program.title = params[:title]
+  program.started_day = params[:started_day]
+  program.started_time = params[:started_time]
+  program.url = params[:url]
+  program.day_of_week = params[:day_of_week]
+  program.tv_station = params[:tv_station]
+  program.save
+
+  status 202
+end
 
 delete '/del' do
   program = Program.find(params[:id])
