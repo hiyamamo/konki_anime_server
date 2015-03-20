@@ -4,6 +4,12 @@ development:
   database: konki_anime
   username: hiroki
   password: nuresen599
+test:
+  adapter: mysql2
+  host: localhost
+  database: konki_anime
+  username: hiroki
+  password: nuresen599
 
 production:
   adapter: postgresql

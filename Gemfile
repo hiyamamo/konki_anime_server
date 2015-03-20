@@ -7,6 +7,8 @@ gem 'sinatra-contrib'
 gem 'sinatra-activerecord'
 gem 'activerecord'
 gem 'rake'
+gem 'rack-test', require:"rack/test"
+gem 'test-unit', "1.2.3"
 group :production do
   gem 'pg'
 end

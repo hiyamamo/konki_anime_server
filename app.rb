@@ -28,12 +28,12 @@ if settings.development?
 end
 
 enable :method_override
-before %r{(/)(?!programs)|(/)(?!tv_station_list/json)} do
+
+before %r{^(?!/json/.*)} do
   protected!
 end
 
 get '/' do
-  protected!
   @programs = Program.all
   @tv_stations = TvStation.all
   erb :add_page
@@ -77,12 +77,11 @@ delete '/del_all' do
 end
 
 get '/tv_station_list' do
-  protected!
   @tv_stations = TvStation.all
   erb :tv_station_list
 end
 
-get '/tv_station_list/json' do
+get '/json/tv_station_list' do
   content_type :json, :charset => 'utf-8'
   tv_stations = TvStation.all
   tv_stations.to_json
@@ -106,7 +105,7 @@ before %r{/programs/|/tv_station_list/json} do
   cache_control :public, :max_age => 86400
 end
 
-get '/programs' do
+get '/json/programs' do
   content_type :json, :charset => 'utf-8'
   p = Rack::Utils.parse_query(@env['rack.request.query_string'])
   unless p['tv_station'].nil? then
