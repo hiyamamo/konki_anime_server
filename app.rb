@@ -3,11 +3,37 @@ require './models/programs.rb'
 require './models/tv_stations.rb'
 require 'csv'
 
+helpers do
+  def protected!
+    return if authorized?
+    headers['WWW-Authenticate'] = 'Basic realm="Restricted Area"'
+    halt 401, "Not authoriezed\n"
+  end
+
+  HTTPASSWD_PATH = '.htpasswd'
+  def authorized?
+    @auth ||= Rack::Auth::Basic::Request.new(request.env)
+    passwd = File.open(HTTPASSWD_PATH).read.split("\n").map{|credential| credential.split(":")}
+    if @auth.provided? and @auth.basic? and @auth.credentials
+      user, pass = @auth.credentials
+      auth = passwd.assoc(user)
+      return false unless auth
+      [user, pass.crypt(auth[1][0..2])] == auth
+    end
+  end
+end
+
 if settings.development?
   require 'sinatra/reloader'
 end
+
 enable :method_override
+before %r{(/)(?!programs)} do
+  protected!
+end
+
 get '/' do
+  protected!
   @programs = Program.all
   @tv_stations = TvStation.all
   erb :add_page
@@ -51,8 +77,15 @@ delete '/del_all' do
 end
 
 get '/tv_station_list' do
+  protected!
   @tv_stations = TvStation.all
   erb :tv_station_list
+end
+
+get '/tv_station_list/json' do
+  content_type :json, :charset => 'utf-8'
+  tv_stations = TvStation.all
+  tv_stations.to_json
 end
 
 post '/tv_station_list/new' do
@@ -62,10 +95,15 @@ post '/tv_station_list/new' do
   status 202
   redirect '/tv_station_list'
 end
+
 delete '/tv_station_list/del' do
   tv_station = TvStation.find(params[:id])
   tv_station.destroy
   redirect '/tv_station_list'
+end
+
+before %r{/programs/|/tv_station_list/json} do
+  cache_control :public, :max_age => 86400
 end
 
 get '/programs' do
