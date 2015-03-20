@@ -28,7 +28,7 @@ if settings.development?
 end
 
 enable :method_override
-before %r{(/)(?!programs)} do
+before %r{(/)(?!programs)|(/)(?!tv_station_list/json)} do
   protected!
 end
 
